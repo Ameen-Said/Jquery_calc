@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap"
+            rel="stylesheet">
+        <style> button{border-radius: 6px; }</style>
+
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="container" >
+            <div class="calc-input">
+
+                <input type="text" id="textbox" style="font-size: 30px;"
+                    name="textbox">
+
+            </div>
+
+            <div class="buttons">
+                <div class="buttons-line">
+                    <button type="button" onclick="remove()">AC </button>
+                    <button type="button" onclick="minus()">+/-</button>
+                    <button type="button" onclick="input('%')">% </button>
+                    <button type="button" onclick="input('/')">/ </button>
+                </div>
+                <div class="buttons-line">
+                    <button type="button" onclick="input(7)">7 </button>
+                    <button type="button" onclick="input(8)">8 </button>
+                    <button type="button" onclick="input(9)">9 </button>
+                    <button type="button" onclick="input('*')">* </button>
+                </div>
+                <div class="buttons-line">
+                    <button type="button" onclick="input(4)">4 </button>
+                    <button type="button" onclick="input(5)">5 </button>
+                    <button type="button" onclick="input(6)">6 </button>
+                    <button type="button" onclick="input('-')">- </button>
+                </div>
+                <div class="buttons-line">
+                    <button type="button" onclick="input(1)">1 </button>
+                    <button type="button" onclick="input(2)">2 </button>
+                    <button type="button" onclick="input(3)">3</button>
+                    <button type="button" onclick="input('+')">+ </button>
+                </div>
+                <div class="buttons-line">
+                    <button type="button" onclick="input(0)">0 </button>
+                    <button type="button" onclick="input('.')">. </button>
+                    <button type="button" onclick="equ()">=</button>
+                </div>
+
+            </div>
+
+        </div>
+    </body>
+</html>
+
+<script>
+
+    
+function input(num){
+           
+    var val = $("#textbox").val();
+    if (val == "" && (num == '.' || num == '+' || num =='-' || num == '*' || num == '%' || num =='/')){
+        return;
+    }
+
+    if (num == '.') {
+        var dotfound = false;
+   
+        for (var i= val.length-1 ; i >= 0 ; i-- ){
+
+      
+
+            if(val[i] == '.'){
+                dotfound = true;
+                break;
+            }
+
+            if(val[i] == '*'|| val[i] == '/' || val[i] == '+' ||  val[i] == '%' || val[i] == '-'){
+                break;
+            }
+        }
+
+        if(dotfound == true){
+            return;
+        }
+               }
+
+    if(num == '*'|| num == '/' || num == '+' ||  num == '%' || num == '-'){
+     
+      
+       var last_char = val[ ( val.length ) -1]
+      
+        if(last_char == '*'|| last_char  == '/'|| last_char == '+'|| last_char == '%'|| last_char == '-'){
+            if(last_char == num){
+                return;
+            }
+            for( var i= 0; i<val.length-1 ; i++){
+                val = val[i];
+            }
+        }
+    }
+    $('#textbox').val(val + num);
+}
+
+
+
+
+function equ(){
+    $("#textbox").val(eval($("#textbox").val()));
+}
+
+
+function remove(){
+    $("#textbox").val("");
+}
+
+function minus(){
+    var val = $("#textbox").val();
+    $("#textbox").val(val *-1);
+}
+</script>
